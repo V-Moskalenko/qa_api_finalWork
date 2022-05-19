@@ -1,4 +1,7 @@
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+
+import java.io.IOException;
 
 import static baseAPI.baseStep.*;
 import static org.junit.Assert.assertEquals;
@@ -6,6 +9,7 @@ import static org.junit.Assert.assertNotEquals;
 
 public class testApi {
     @Test
+    @DisplayName("API Рик и Морти")
     public void firstTest(){
         getInfoCharacter("2");
         String temp_1 = characterSpecies;
@@ -15,4 +19,13 @@ public class testApi {
         assertEquals("Раса не совпадает", temp_1, characterSpecies);
         assertEquals("Локация не совпадает", temp_2, characterLocation);
     }
+    @Test
+    @DisplayName("API reqres.in")
+    public void secondTest() throws IOException {
+        createPotato();
+        assertEquals("Tomato", newName);
+        assertEquals("Eat maket", newJob);
+    }
+
+
 }

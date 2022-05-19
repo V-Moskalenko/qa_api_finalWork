@@ -4,6 +4,10 @@ import io.restassured.response.Response;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import static io.restassured.RestAssured.given;
 
 public class baseStep {
@@ -16,6 +20,10 @@ public class baseStep {
     public static String lastEpisodeWithMortySmith;
     public static String uriCharacter_2;
     public static String idCharacter_2;
+    public static String idPotato;
+    public static JSONObject arr_3;
+    public static String newName;
+    public static String newJob;
 
     public static void getInfoCharacter(String id) {
         Response getCharacter = given()
@@ -55,9 +63,41 @@ public class baseStep {
         System.out.println();
     }
 
-    public static void main(String[] args) {
+    public static void createPotato() throws IOException {
+        JSONObject data = new JSONObject(new String(Files.readAllBytes(Paths.get("src/test/resources/json/1.json"))));
+        Response postPotato = given()
+                .header("Content-type", "application/json")
+                .body(data.toString())
+                .baseUri("https://reqres.in/api")
+                .when()
+                .post("/users")
+                .then()
+                .statusCode(201)
+                .extract()
+                .response();
+        idPotato = new JSONObject(postPotato.getBody().asString()).get("id").toString();
+
+        JSONObject data_2 = new JSONObject(new String(Files.readAllBytes(Paths.get("src/test/resources/json/2.json"))));
+        Response updatePotato = given()
+                .header("Content-type", "application/json")
+                .body(data_2.toString())
+                .baseUri("https://reqres.in/api")
+                .when()
+                .put("/users/" + idPotato)
+                .then()
+                .statusCode(200)
+                .extract()
+                .response();
+        arr_3 = new JSONObject(updatePotato.getBody().asString());
+        newName = arr_3.get("name").toString();
+        newJob = arr_3.get("job").toString();
+        System.out.println(arr_3);
+    }
+
+    public static void main(String[] args) throws IOException {
         getInfoCharacter("2");
         getInfoEpisode(lastEpisodeWithMortySmith);
         getInfoCharacter(idCharacter_2);
+        createPotato();
     }
 }
