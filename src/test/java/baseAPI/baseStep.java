@@ -1,5 +1,6 @@
 package baseAPI;
 
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,6 +26,7 @@ public class baseStep {
     public static String newName;
     public static String newJob;
 
+    @Step("Получение информации о персонаже под id {id}")
     public static void getInfoCharacter(String id) {
         Response getCharacter = given()
                 .header("Content-type", "application/json")
@@ -48,6 +50,7 @@ public class baseStep {
         System.out.println("Последний эпизод с " + nameCharacter + " : " + lastEpisodeWithMortySmith);
         System.out.println();
     }
+    @Step("Получение информации о последнем эпизоде по полученному URI {episodUri}")
     public static void getInfoEpisode(String episodUri){
         Response getEpisode = given()
                 .header("Content-type", "application/json")
@@ -65,6 +68,7 @@ public class baseStep {
         System.out.println();
     }
 
+    @Step("POST объекта по JSON файлу 1 и PUT объекта по JSON файлу 2")
     public static void createPotato() throws IOException {
         JSONObject data = new JSONObject(new String(Files.readAllBytes(Paths.get("src/test/resources/json/1.json"))));
         Response postPotato = given()
