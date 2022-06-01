@@ -1,3 +1,4 @@
+import Utils.Configuration;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import org.junit.Test;
@@ -7,7 +8,6 @@ import java.io.IOException;
 
 import static baseAPI.baseStep.*;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 public class testApi {
     @Epic(value = "Тест API")
@@ -15,7 +15,7 @@ public class testApi {
     @Test
     @DisplayName("API Рик и Морти")
     public void firstTest(){
-        getInfoCharacter("2");
+        getInfoCharacter(Configuration.getValue("id"));
         String temp_1 = characterSpecies;
         String temp_2 = characterLocation;
         getInfoEpisode(lastEpisodeWithMortySmith);

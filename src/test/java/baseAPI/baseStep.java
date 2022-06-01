@@ -1,5 +1,6 @@
 package baseAPI;
 
+import Utils.Configuration;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import org.json.JSONArray;
@@ -30,9 +31,9 @@ public class baseStep {
     public static void getInfoCharacter(String id) {
         Response getCharacter = given()
                 .header("Content-type", "application/json")
-                .baseUri("https://rickandmortyapi.com/api")
+                .baseUri(Configuration.getValue("Uri"))
                 .when()
-                .get("/character/" + id)
+                .get(Configuration.getValue("endpoint") + id)
                 .then()
                 .statusCode(200)
                 .extract()
