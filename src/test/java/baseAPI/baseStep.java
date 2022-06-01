@@ -88,7 +88,7 @@ public class baseStep {
         Response updatePotato = given()
                 .header("Content-type", "application/json")
                 .body(data_2.toString())
-                .baseUri("https://reqres.in/api")
+                .baseUri(Configuration.getValue("Uri2"))
                 .when()
                 .put("/users/" + idPotato)
                 .then()
