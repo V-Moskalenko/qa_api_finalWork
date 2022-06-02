@@ -14,7 +14,9 @@ import org.junit.runner.RunWith;
         plugin = {"pretty", "io.qameta.allure.cucumber6jvm.AllureCucumber6Jvm", "json:target/cucumber.json"},
         tags = "@TEST"
 )
-
+/**
+ * Класс запуска теста для Cucumber
+ */
 public class RunnerTest {
     @BeforeClass
     public static void before(){

@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * Класс для поллучения данных с props.properties
+ */
 public class Configuration {
     public static final String CONFIGURATION_FILE = "/props.properties";
     public static final Properties properties;

@@ -1,9 +1,6 @@
 import Utils.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Owner;
+import io.qameta.allure.*;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,9 +9,12 @@ import org.junit.jupiter.api.Tag;
 
 import java.io.IOException;
 
-import static baseAPI.baseStep.*;
+import static StepJunit.baseStep.*;
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Класс для запуска тестов JUnit
+ */
 public class testApi {
     @BeforeEach
     public void setFormat() {
@@ -30,8 +30,9 @@ public class testApi {
     @Test
     @Tag("1")
     @DisplayName("API Рик и Морти")
-    public void firstTest(){
+    public void firstTest() throws IOException {
         getInfoCharacter(Configuration.getValue("id"));
+
         String temp_1 = characterSpecies;
         String temp_2 = characterLocation;
         getInfoEpisode(lastEpisodeWithMortySmith);
@@ -52,6 +53,4 @@ public class testApi {
         assertEquals("Tomato", newName);
         assertEquals("Eat maket", newJob);
     }
-
-
 }
